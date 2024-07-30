@@ -79,7 +79,7 @@ export async function getNextDocuments({ nextCursor }: Props) {
   }
 
   // Convert to our document format and return
-  const documents = buildDocuments(finalRooms);
+  const documents = await buildDocuments(finalRooms);
   const result: GetDocumentsResponse = {
     documents: documents,
     nextCursor: newNextCursor,

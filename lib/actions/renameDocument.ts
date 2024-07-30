@@ -1,5 +1,6 @@
 "use server";
 
+import axios, { AxiosError } from "axios";
 import { auth } from "@/auth";
 import { userAllowedInRoom } from "@/lib/utils";
 import { liveblocks } from "@/liveblocks.server.config";
@@ -68,18 +69,46 @@ export async function renameDocument({ documentId, name }: Props) {
 
   // Update room name metadata
   try {
-    await liveblocks.updateRoom(documentId, {
-      metadata: { name },
-    });
-  } catch (err) {
-    return {
-      error: {
-        code: 401,
-        message: "Can't update room name metadata",
-        suggestion: "Please refresh the page and try again",
+    const response = await axios.patch('http://localhost:3000/api/documents', {
+      id: documentId,
+      updates: {
+        name: name,
       },
-    };
-  }
+    });
 
-  return { data: true };
+    if (response.status !== 200) {
+      console.error('Error updating document name:', response.data);
+      return {
+        error: {
+          code: response.status,
+          message: response.data.error || "Can't update room name metadata",
+          suggestion: "Please refresh the page and try again",
+        },
+      };
+    }
+    
+    return { data: true };
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      // AxiosError
+      console.error('Failed to update document name:', err.message);
+      return {
+        error: {
+          code: err.response?.status || 500,
+          message: err.response?.data?.error || "Can't update room name metadata",
+          suggestion: "Please refresh the page and try again",
+        },
+      };
+    } else {
+      // Unknown error
+      console.error('Failed to update document name:', err);
+      return {
+        error: {
+          code: 500,
+          message: "An unknown error occurred",
+          suggestion: "Please refresh the page and try again",
+        },
+      };
+    }
+  }
 }

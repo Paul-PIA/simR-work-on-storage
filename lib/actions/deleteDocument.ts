@@ -1,5 +1,6 @@
 "use server";
 
+import axios, { AxiosError } from "axios";
 import { auth } from "@/auth";
 import { userAllowedInRoom } from "@/lib/utils";
 import { liveblocks } from "@/liveblocks.server.config";
@@ -64,18 +65,46 @@ export async function deleteDocument({ documentId }: Props) {
     };
   }
 
-  // Delete room
+  // Delete document and room
   try {
-    await liveblocks.deleteRoom(documentId);
-  } catch (err) {
-    return {
-      error: {
-        code: 401,
-        message: "Can't delete the room",
-        suggestion: "Please try again",
-      },
-    };
-  }
+    // Delete document via API
+    const response = await axios.delete('http://localhost:3000/api/documents', {
+      data: { id: documentId }
+    });
 
-  return { data: documentId };
+    if (response.status !== 200) {
+      console.error('Error deleting document:', response.data);
+      return {
+        error: {
+          code: response.status,
+          message: response.data.error || "Can't delete the document",
+          suggestion: "Please try again",
+        },
+      };
+    }
+
+    return { data: documentId };
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      // AxiosError
+      console.error('Failed to delete document:', err.message);
+      return {
+        error: {
+          code: err.response?.status || 500,
+          message: err.response?.data?.error || "Can't delete the document",
+          suggestion: "Please try again",
+        },
+      };
+    } else {
+      // Unknown error
+      console.error('Failed to delete document:', err);
+      return {
+        error: {
+          code: 500,
+          message: "An unknown error occurred",
+          suggestion: "Please try again",
+        },
+      };
+    }
+  }
 }

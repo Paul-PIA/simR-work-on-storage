@@ -39,7 +39,6 @@ export function TextDocumentView({ initialDocument, initialError }: Props) {
     <RoomProvider
       id={id as string}
       initialPresence={{ cursor: null }}
-      initialStorage={{ notes: new LiveMap() }}
     >
       <InitialDocumentProvider initialDocument={initialDocument}>
         <DocumentLayout

@@ -14,6 +14,7 @@ import {
   DocumentType,
   DocumentUser,
 } from "@/types";
+import axios from "axios";
 
 type Props = {
   name: Document["name"];
@@ -53,14 +54,6 @@ export async function createDocument(
     };
   }
 
-  // Custom metadata for our document
-  const metadata: DocumentRoomMetadata = {
-    name: name,
-    type: type,
-    owner: userId,
-    draft: draft ? "yes" : "no",
-  };
-
   // Give creator of document full access
   const usersAccesses: RoomAccesses = {
     [userId]: ["room:write"],
@@ -80,10 +73,23 @@ export async function createDocument(
 
   const roomId = nanoid();
 
+  const metadata: DocumentRoomMetadata = {
+    id: roomId,
+    name: name,
+    type: type,
+    owner: userId,
+    draft: draft ? "yes" : "no",
+  };
+
+  try {
+    await axios.post("http://localhost:3000/api/documents", { document: metadata });
+  } catch (error) {
+    console.error("Erreur lors de la creation des metadonnees :", error);
+  }
+
   let room;
   try {
     room = await liveblocks.createRoom(roomId, {
-      metadata,
       usersAccesses,
       groupsAccesses,
       defaultAccesses: [],
@@ -98,7 +104,8 @@ export async function createDocument(
     };
   }
 
-  const document: Document = buildDocument(room);
+  // Utilisez `await` pour attendre la résolution de la promesse
+  const document: Document = await buildDocument(room);
 
   if (redirectToDocument) {
     // Has to return `undefined`

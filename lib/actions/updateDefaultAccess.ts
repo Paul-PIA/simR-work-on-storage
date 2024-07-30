@@ -111,6 +111,6 @@ export async function updateDefaultAccess({ documentId, access }: Props) {
   }
 
   // If successful, covert to custom document format and return
-  const document: Document = buildDocument(updatedRoom);
+  const document: Document = await buildDocument(updatedRoom);
   return { data: document };
 }

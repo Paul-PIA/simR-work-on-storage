@@ -130,7 +130,7 @@ export async function getDocuments({
   }
 
   // Convert rooms to custom document format
-  const documents = buildDocuments(finalRooms);
+  const documents = await buildDocuments(finalRooms); // Utiliser await ici
   const result: GetDocumentsResponse = {
     documents,
     nextCursor,

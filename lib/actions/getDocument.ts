@@ -63,6 +63,6 @@ export async function getDocument({ documentId }: Props) {
   }
 
   // Convert room into our custom document format and return
-  const document: Document = buildDocument(room);
+  const document: Document = await buildDocument(room);
   return { data: document };
 }

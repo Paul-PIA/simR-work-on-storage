@@ -5,8 +5,10 @@ import {
   ComponentProps,
   KeyboardEvent,
   useCallback,
+  useEffect,
   useState,
 } from "react";
+import axios from "axios";
 import { EditIcon } from "@/icons";
 import { useInitialDocument } from "@/lib/hooks/useInitialDocument";
 import { Tooltip } from "@/primitives/Tooltip";
@@ -25,6 +27,20 @@ export function DocumentHeaderName({
   const isReadOnly = useSelf((me) => !me.canWrite);
   const [draftName, setDraftName] = useState(initialDocument.name);
   const [isRenaming, setRenaming] = useState(false);
+
+  // UseEffect pour récupérer le nom actuel du fichier
+  useEffect(() => {
+    const fetchDocumentName = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/documents?id=${initialDocument.id}`);
+        setDraftName(response.data.name);
+      } catch (error) {
+        console.error('Failed to fetch document name:', error);
+      }
+    };
+
+    fetchDocumentName();
+  }, [initialDocument.id]);
 
   const handleRenamingStart = useCallback(() => {
     setRenaming(true);

@@ -31,7 +31,7 @@ export type Document = {
   type: DocumentType;
 };
 
-export type DocumentType = "text" | "whiteboard" | "spreadsheet";
+export type DocumentType = "text" | "whiteboard" | "spreadsheet" | "counter";
 
 export type DocumentGroup = Group & {
   access: DocumentAccess;
@@ -65,6 +65,7 @@ export type DocumentAccesses = {
 // Room metadata used when creating a new document
 export interface DocumentRoomMetadata
   extends Record<string, string | string[]> {
+  id : string;
   name: Document["name"];
   type: DocumentType;
   owner: User["id"];
