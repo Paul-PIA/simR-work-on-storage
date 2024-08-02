@@ -3,6 +3,8 @@ import { Document, DocumentRoomMetadata } from "@/types";
 import { roomAccessesToDocumentAccess } from "./convertAccessType";
 import axios from "axios";
 
+// DEUXIEME MODIFICATION : on remplace la gestion classique des metadonnées par une requête GET à l'api
+
 /**
  * Convert Liveblocks rooms into our custom document format
  *

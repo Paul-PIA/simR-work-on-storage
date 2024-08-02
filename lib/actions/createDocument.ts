@@ -1,5 +1,7 @@
 "use server";
 
+// PREMIERE MODIFICATION : on remplace les metadonnées de la room par une requête POST vers une api qui va écrire lles metadonnées dans un fichier json placé dans le dossier data
+
 import { RoomAccesses } from "@liveblocks/node";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";

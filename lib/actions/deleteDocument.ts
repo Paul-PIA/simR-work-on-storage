@@ -1,10 +1,13 @@
 "use server";
 
+// CINQUIEME MODIFICATION : On ajoute une requête DELETE pour pouvoir supprimer un document du fichier json. ATTENTION ! il faut aussi supprimer la Room de Liveblocks
+
 import axios, { AxiosError } from "axios";
 import { auth } from "@/auth";
 import { userAllowedInRoom } from "@/lib/utils";
 import { liveblocks } from "@/liveblocks.server.config";
 import { Document } from "@/types";
+
 
 type Props = {
   documentId: Document["id"];

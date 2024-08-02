@@ -1,5 +1,7 @@
 import { Document, User } from "./types";
 
+// SUPPRESSION du paramètre Storage, il faut répercuter ce changement dans toutes les instances de Room de l'application
+
 declare global {
   interface Liveblocks {
     // Each user's Presence, for useMyPresence, useOthers, etc.

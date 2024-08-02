@@ -1,5 +1,7 @@
 "use server";
 
+// TROISIEME MODIFICATION : on implémente une requête GET/{id} dans l'api et ce type de requête permet de récupérer les metadonnées d'un document spécifique
+
 import { auth } from "@/auth";
 import { buildDocument, userAllowedInRoom } from "@/lib/utils";
 import { liveblocks } from "@/liveblocks.server.config";

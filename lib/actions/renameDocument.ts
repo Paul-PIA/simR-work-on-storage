@@ -1,5 +1,7 @@
 "use server";
 
+// QUATRIEME MODIFICATION : on ajoute une requête PATCH à l'api qui va permettre de modifier les metadonnées, ici le nom de l'organisation.
+
 import axios, { AxiosError } from "axios";
 import { auth } from "@/auth";
 import { userAllowedInRoom } from "@/lib/utils";
