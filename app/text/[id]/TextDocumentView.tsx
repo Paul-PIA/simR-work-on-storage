@@ -36,10 +36,7 @@ export function TextDocumentView({ initialDocument, initialError }: Props) {
   }
 
   return (
-    <RoomProvider
-      id={id as string}
-      initialPresence={{ cursor: null }}
-    >
+    <RoomProvider id={id as string} initialPresence={{ cursor: null }}>
       <InitialDocumentProvider initialDocument={initialDocument}>
         <DocumentLayout
           header={<DocumentHeader documentId={initialDocument.id} />}

@@ -84,7 +84,9 @@ export async function createDocument(
   };
 
   try {
-    await axios.post("http://localhost:3000/api/documents", { document: metadata });
+    await axios.post("http://localhost:3000/api/documents", {
+      document: metadata,
+    });
   } catch (error) {
     console.error("Erreur lors de la creation des metadonnees :", error);
   }

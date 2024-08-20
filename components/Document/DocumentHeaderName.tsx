@@ -32,10 +32,12 @@ export function DocumentHeaderName({
   useEffect(() => {
     const fetchDocumentName = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/documents?id=${initialDocument.id}`);
+        const response = await axios.get(
+          `http://localhost:3000/api/documents?id=${initialDocument.id}`
+        );
         setDraftName(response.data.name);
       } catch (error) {
-        console.error('Failed to fetch document name:', error);
+        console.error("Failed to fetch document name:", error);
       }
     };
 

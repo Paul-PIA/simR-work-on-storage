@@ -48,9 +48,17 @@ export async function GET(request: Request) {
 // Fonction POST pour ajouter une nouvelle métadonnée
 export async function POST(request: Request) {
   try {
-    const { document }: { document: DocumentRoomMetadata } = await request.json();
+    const { document }: { document: DocumentRoomMetadata } =
+      await request.json();
 
-    if (!document || !document.id || !document.name || !document.type || !document.owner || typeof document.draft !== 'string') {
+    if (
+      !document ||
+      !document.id ||
+      !document.name ||
+      !document.type ||
+      !document.owner ||
+      typeof document.draft !== "string"
+    ) {
       return NextResponse.json({
         error: "Invalid metadata",
         status: 400,
@@ -76,7 +84,11 @@ export async function POST(request: Request) {
 // Fonction PATCH pour mettre à jour un document
 export async function PATCH(request: Request) {
   try {
-    const { id, updates }: { id: string; updates: Partial<DocumentRoomMetadata> } = await request.json();
+    const {
+      id,
+      updates,
+    }: { id: string; updates: Partial<DocumentRoomMetadata> } =
+      await request.json();
 
     if (!id || !updates) {
       return NextResponse.json({

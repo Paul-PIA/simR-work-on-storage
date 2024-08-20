@@ -65,7 +65,7 @@ export type DocumentAccesses = {
 // Room metadata used when creating a new document
 export interface DocumentRoomMetadata
   extends Record<string, string | string[]> {
-  id : string;
+  id: string;
   name: Document["name"];
   type: DocumentType;
   owner: User["id"];

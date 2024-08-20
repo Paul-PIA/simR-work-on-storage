@@ -1,42 +1,41 @@
 .counterContainer {
-    text-align: center;
-    margin-top: 20px;
-    background-color: #e0f7fa;
-    padding: 20px;
-    border: 1px solid #b2ebf2;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .counterTitle {
-    color: #007bff;
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .counterValue {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 20px;
-  }
-  
-  .buttonGroup {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
+  text-align: center;
+  margin-top: 20px;
+  background-color: #e0f7fa;
+  padding: 20px;
+  border: 1px solid #b2ebf2;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.counterTitle {
+  color: #007bff;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.counterValue {
+  font-size: 24px;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}

@@ -51,7 +51,9 @@ export function Counter({ initialCount = 0 }: CounterProps) {
 
   const saveCount = async (newCount: number) => {
     try {
-      await axios.post("http://localhost:3000/api/counter", { count: newCount });
+      await axios.post("http://localhost:3000/api/counter", {
+        count: newCount,
+      });
     } catch (error) {
       console.error("Erreur lors de la sauvegarde du compteur :", error);
     }
@@ -78,4 +80,3 @@ export function Counter({ initialCount = 0 }: CounterProps) {
 }
 
 export default Counter;
-

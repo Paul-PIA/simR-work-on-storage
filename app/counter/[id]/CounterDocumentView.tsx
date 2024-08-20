@@ -44,7 +44,9 @@ export function CounterDocumentView({
   return (
     <RoomProvider id={id as string} initialPresence={{ cursor: null }}>
       <InitialDocumentProvider initialDocument={initialDocument}>
-        <DocumentLayout header={<DocumentHeader documentId={initialDocument.id} />}>
+        <DocumentLayout
+          header={<DocumentHeader documentId={initialDocument.id} />}
+        >
           <Counter initialCount={initialCount} />
         </DocumentLayout>
       </InitialDocumentProvider>

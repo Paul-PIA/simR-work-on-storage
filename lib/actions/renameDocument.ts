@@ -97,7 +97,8 @@ export async function renameDocument({ documentId, name }: Props) {
       return {
         error: {
           code: err.response?.status || 500,
-          message: err.response?.data?.error || "Can't update room name metadata",
+          message:
+            err.response?.data?.error || "Can't update room name metadata",
           suggestion: "Please refresh the page and try again",
         },
       };
