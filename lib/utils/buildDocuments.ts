@@ -1,5 +1,5 @@
 import { RoomInfo } from "@liveblocks/node";
-import { Document, DocumentRoomMetadata } from "@/types";
+import { Document } from "@/types";
 import { roomAccessesToDocumentAccess } from "./convertAccessType";
 import axios from "axios";
 

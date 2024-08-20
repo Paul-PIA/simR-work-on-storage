@@ -2,7 +2,7 @@
 
 // QUATRIEME MODIFICATION : on ajoute une requête PATCH à l'api qui va permettre de modifier les metadonnées, ici le nom de l'organisation.
 
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { auth } from "@/auth";
 import { userAllowedInRoom } from "@/lib/utils";
 import { liveblocks } from "@/liveblocks.server.config";
@@ -71,7 +71,7 @@ export async function renameDocument({ documentId, name }: Props) {
 
   // Update room name metadata
   try {
-    const response = await axios.patch('http://localhost:3000/api/documents', {
+    const response = await axios.patch("http://localhost:3000/api/documents", {
       id: documentId,
       updates: {
         name: name,
@@ -79,7 +79,7 @@ export async function renameDocument({ documentId, name }: Props) {
     });
 
     if (response.status !== 200) {
-      console.error('Error updating document name:', response.data);
+      console.error("Error updating document name:", response.data);
       return {
         error: {
           code: response.status,
@@ -88,12 +88,12 @@ export async function renameDocument({ documentId, name }: Props) {
         },
       };
     }
-    
+
     return { data: true };
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // AxiosError
-      console.error('Failed to update document name:', err.message);
+      console.error("Failed to update document name:", err.message);
       return {
         error: {
           code: err.response?.status || 500,
@@ -103,7 +103,7 @@ export async function renameDocument({ documentId, name }: Props) {
       };
     } else {
       // Unknown error
-      console.error('Failed to update document name:', err);
+      console.error("Failed to update document name:", err);
       return {
         error: {
           code: 500,

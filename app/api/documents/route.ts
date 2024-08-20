@@ -4,7 +4,7 @@ import { join } from "path";
 import { liveblocks } from "@/liveblocks.server.config"; // Import Liveblocks config
 
 // Définir le chemin du fichier JSON
-const filePath = join(process.cwd(), 'data', 'documents.json');
+const filePath = join(process.cwd(), "data", "documents.json");
 
 // Définir le type de métadonnée
 type DocumentRoomMetadata = {
@@ -37,7 +37,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(documents);
   } catch (error) {
-    console.error('Failed to read documents:', error);
+    console.error("Failed to read documents:", error);
     return NextResponse.json({
       error: "Failed to read documents",
       status: 500,
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       });
     }
 
-    const data = await fs.readFile(filePath, 'utf8');
+    const data = await fs.readFile(filePath, "utf8");
     const documents: DocumentRoomMetadata[] = JSON.parse(data);
 
     documents.push(document);
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Failed to save metadata:', error);
+    console.error("Failed to save metadata:", error);
     return NextResponse.json({
       error: "Failed to save metadata",
       status: 500,
@@ -85,7 +85,7 @@ export async function PATCH(request: Request) {
       });
     }
 
-    const data = await fs.readFile(filePath, 'utf8');
+    const data = await fs.readFile(filePath, "utf8");
     const documents: DocumentRoomMetadata[] = JSON.parse(data);
 
     const documentIndex = documents.findIndex((doc) => doc.id === id);
@@ -102,7 +102,7 @@ export async function PATCH(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Failed to update document:', error);
+    console.error("Failed to update document:", error);
     return NextResponse.json({
       error: "Failed to update document",
       status: 500,
@@ -139,7 +139,7 @@ export async function DELETE(request: Request) {
     try {
       await liveblocks.deleteRoom(id);
     } catch (err) {
-      console.error('Failed to delete Liveblocks room:', err);
+      console.error("Failed to delete Liveblocks room:", err);
       return NextResponse.json({
         error: "Failed to delete Liveblocks room",
         status: 500,
@@ -148,7 +148,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Failed to delete document:', error);
+    console.error("Failed to delete document:", error);
     return NextResponse.json({
       error: "Failed to delete document",
       status: 500,

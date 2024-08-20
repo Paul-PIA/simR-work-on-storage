@@ -2,12 +2,11 @@
 
 // CINQUIEME MODIFICATION : On ajoute une requête DELETE pour pouvoir supprimer un document du fichier json. ATTENTION ! il faut aussi supprimer la Room de Liveblocks
 
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { auth } from "@/auth";
 import { userAllowedInRoom } from "@/lib/utils";
 import { liveblocks } from "@/liveblocks.server.config";
 import { Document } from "@/types";
-
 
 type Props = {
   documentId: Document["id"];
@@ -71,12 +70,12 @@ export async function deleteDocument({ documentId }: Props) {
   // Delete document and room
   try {
     // Delete document via API
-    const response = await axios.delete('http://localhost:3000/api/documents', {
-      data: { id: documentId }
+    const response = await axios.delete("http://localhost:3000/api/documents", {
+      data: { id: documentId },
     });
 
     if (response.status !== 200) {
-      console.error('Error deleting document:', response.data);
+      console.error("Error deleting document:", response.data);
       return {
         error: {
           code: response.status,
@@ -90,7 +89,7 @@ export async function deleteDocument({ documentId }: Props) {
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // AxiosError
-      console.error('Failed to delete document:', err.message);
+      console.error("Failed to delete document:", err.message);
       return {
         error: {
           code: err.response?.status || 500,
@@ -100,7 +99,7 @@ export async function deleteDocument({ documentId }: Props) {
       };
     } else {
       // Unknown error
-      console.error('Failed to delete document:', err);
+      console.error("Failed to delete document:", err);
       return {
         error: {
           code: 500,
