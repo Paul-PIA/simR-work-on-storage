@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./counter.module.css";
+import styles from "./Counter.module.css";
 
 // LA REQUETE POST permet de modifier la valeur du compteur stockée dans le fichier json. On observe qu'à chaque clic sur le bouton increment, la valeur affichée est augmentée, puis sauvegardée juste après dans le fichier json.
 

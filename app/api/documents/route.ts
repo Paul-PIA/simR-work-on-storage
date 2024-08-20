@@ -27,7 +27,10 @@ export async function GET(request: Request) {
     if (id) {
       const document = documents.find((doc) => doc.id === id);
       if (!document) {
-        return NextResponse.json({ error: 'Document not found' }, { status: 404 });
+        return NextResponse.json({
+          error: 'Document not found',
+          status: 404
+        });
       }
       return NextResponse.json(document);
     }
@@ -53,7 +56,7 @@ export async function POST(request: Request) {
 
     documents.push(document);
     await fs.writeFile(filePath, JSON.stringify(documents, null, 2));
-    
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Failed to save metadata:', error);

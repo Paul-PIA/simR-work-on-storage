@@ -11,24 +11,36 @@ export async function GET(request: NextRequest) {
     const count = JSON.parse(data);
     return NextResponse.json(count);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to read counter value" }, { status: 500 });
+    return NextResponse.json({
+      error: "Failed to read counter value",
+      status: 500
+    });
   }
 }
 
 export async function POST(request: NextRequest) {
   const { count } = await request.json();
   if (typeof count !== "number") {
-    return NextResponse.json({ error: "Invalid count value" }, { status: 400 });
+    return NextResponse.json({
+      error: "Invalid count value",
+      status: 400
+    });
   }
 
   try {
     await fs.writeFile(filePath, JSON.stringify([count]));
     return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to update counter value" }, { status: 500 });
+    return NextResponse.json({
+      error: "Failed to update counter value",
+      status: 500
+    });
   }
 }
 
 export async function OPTIONS() {
-  return NextResponse.json({ message: "Method not allowed" }, { status: 405 });
+  return NextResponse.json({
+    message: "Method not allowed",
+    status: 405
+  });
 }
