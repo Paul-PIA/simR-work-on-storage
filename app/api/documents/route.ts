@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import { join } from "path";
-import { liveblocks } from "@/liveblocks.server.config"; // Import Liveblocks config
 
 // Définir le chemin du fichier JSON
 const filePath = join(process.cwd(), "data", "documents.json");
@@ -148,15 +147,15 @@ export async function DELETE(request: Request) {
     await fs.writeFile(filePath, JSON.stringify(filteredDocuments, null, 2));
 
     // Supprimer la room de Liveblocks
-    try {
-      await liveblocks.deleteRoom(id);
-    } catch (err) {
-      console.error("Failed to delete Liveblocks room:", err);
-      return NextResponse.json({
-        error: "Failed to delete Liveblocks room",
-        status: 500,
-      });
-    }
+    // try {
+    //   await liveblocks.deleteRoom(id);
+    // } catch (err) {
+    //   console.error("Failed to delete Liveblocks room:", err);
+    //   return NextResponse.json({
+    //     error: "Failed to delete Liveblocks room",
+    //     status: 500,
+    //   });
+    // }
 
     return NextResponse.json({ success: true });
   } catch (error) {
